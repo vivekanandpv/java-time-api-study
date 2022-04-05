@@ -1,24 +1,21 @@
 package in.athenaeum;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Month;
 
 public class Main {
 
     public static void main(String[] args) {
-        //  Use LocalDate for representing only the dates
-        LocalDate newYear = LocalDate.of(2022, 1, 1); //  see LocalDate.now() and other factory methods
+        //  month can also be an enum
+        //  January is value 1 (contrasting java.util.Date's zero-indexed months)
+        LocalDate newYear = LocalDate.of(2022, Month.JANUARY, 1);
 
-        //  Use LocalTime for representing only times (without timezone or daylight saving)
-        LocalTime noon = LocalTime.NOON;
-        LocalTime officeStart = LocalTime.of(9, 30, 0);
+        //  In contrast to java.util.Date, the DayOfWeek starts with Monday (value 1)
+        //  Saturday is 6 and Sunday is 7
+        DayOfWeek day = newYear.getDayOfWeek();
 
-        //  Parsing dates
-        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/format/DateTimeFormatter.html
-        LocalDate diwali = LocalDate.parse("24-10-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-        //  Formatting the output
-        String diwaliAsString = diwali.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        //  getting value
+        int dayValue = day.getValue();
     }
 }
