@@ -1,27 +1,24 @@
 package in.athenaeum;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
     public static void main(String[] args) {
-	    //  Instant is a point on the eternal timeline
-        //  This has no meaning per se to humans
-        //  This way of profiling for performance may not be a good approach
-        Instant startInstant = Instant.now();
+        //  Use LocalDate for representing only the dates
+        LocalDate newYear = LocalDate.of(2022, 1, 1); //  see LocalDate.now() and other factory methods
 
-        for (int i = 0; i < 1_000_000_000; i++) {
-            //  some code
-        }
+        //  Use LocalTime for representing only times (without timezone or daylight saving)
+        LocalTime noon = LocalTime.NOON;
+        LocalTime officeStart = LocalTime.of(9, 30, 0);
 
-        Instant endInstant = Instant.now();
+        //  Parsing dates
+        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/format/DateTimeFormatter.html
+        LocalDate diwali = LocalDate.parse("24-10-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        //  Duration is a measure between two Temporal instances
-        //  Instant implements Temporal
-        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/temporal/Temporal.html
-        Duration duration = Duration.between(startInstant, endInstant);
-        System.out.println(duration.toNanos()); //  .toSeconds() was introduced in Java 9, use .getSeconds() in Java 8
+        //  Formatting the output
+        String diwaliAsString = diwali.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 }
