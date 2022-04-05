@@ -10,18 +10,18 @@ public class Main {
 
     public static void main(String[] args) {
         LocalDate newYear = LocalDate.of(2022, Month.JANUARY, 1);
+        LocalDate financialStart = LocalDate.of(2022, Month.APRIL, 1);
 
+        //  Period is year, month, and day
+        //  Period implements TemporalAmount interface
+        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/temporal/TemporalAmount.html
+        Period q4 = Period.between(newYear, financialStart);
+        System.out.println(q4.getMonths());
 
-        //  All the date time apis in java.time are immutable
-        //  General additions (also check minus)
-        //  plus and minus do not mutate, but produce new instances
-        LocalDate result1 = newYear.plus(Period.ofDays(12));
-        LocalDate result2 = newYear.plus(12, ChronoUnit.DAYS);
-        LocalDate result3 = newYear.plus(Period.ofWeeks(2));
+        //  Creating period
+        Period twoMonthsAnd5Days = Period.ofMonths(2).plusDays(5);
 
-        //  Specific additions (also check minus)
-        LocalDate result4 = newYear.plusDays(2);
-        LocalDate result5 = newYear.plusMonths(1);
-        LocalDate result6 = newYear.plusYears(1);
+        //  LocalDate plus (minus) can also work with Period (as TemporalAmount)
+        newYear.plus(twoMonthsAnd5Days);
     }
 }
