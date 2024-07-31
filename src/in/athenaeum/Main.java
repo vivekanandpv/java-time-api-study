@@ -8,12 +8,13 @@ import java.util.Set;
 public class Main {
 
     public static void main(String[] args) {
-        ZonedDateTime today = ZonedDateTime.now();
-        ZonedDateTime newYearInIndia = ZonedDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0, 0), ZoneId.of("Asia/Kolkata"));
+        LocalDate ld = LocalDate.of(2024, 1, 1);
+        LocalDate ld1 = LocalDate.of(2024, 3, 31);
+        LocalDate ld2 = LocalDate.of(2024, 1, 1);
 
-        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
-
-        //  Zone conversion
-        ZonedDateTime zdtInPdt = newYearInIndia.withZoneSameInstant(ZoneId.of("America/Los_Angeles"));
+        //  these APIs work with LocalTime, LocalDateTime, ZonedDateTime as well
+        boolean r1 = ld.isBefore(ld1);
+        boolean r2 = ld1.isAfter(ld);
+        boolean r3 = ld1.isEqual(ld2);
     }
 }
