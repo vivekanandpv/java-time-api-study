@@ -1,27 +1,28 @@
 package in.athenaeum;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Main {
 
     public static void main(String[] args) {
-        LocalDate newYear = LocalDate.of(2022, Month.JANUARY, 1);
-        LocalDate financialStart = LocalDate.of(2022, Month.APRIL, 1);
+        LocalDateTime ldt = LocalDateTime.of(2022, Month.JANUARY, 1, 9, 30, 0);
 
-        //  Period is year, month, and day
-        //  Period implements TemporalAmount interface
-        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/temporal/TemporalAmount.html
-        Period q4 = Period.between(newYear, financialStart);
-        System.out.println(q4.getMonths());
+        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/format/DateTimeFormatter.html
+        LocalDateTime parsedLdt = LocalDateTime.parse("15-08-2024 08:30:00 am", DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
 
-        //  Creating period
-        Period twoMonthsAnd5Days = Period.ofMonths(2).plusDays(5);
+        //  outputs am/pm; no uppercase. please check:
+        //  https://stackoverflow.com/a/13581910
+        //  https://stackoverflow.com/a/13581677
+        String s = ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
 
-        //  LocalDate plus (minus) can also work with Period (as TemporalAmount)
-        newYear.plus(twoMonthsAnd5Days);
+        LocalDateTime nextLdt = ldt.plus(Duration.of(8737699, ChronoUnit.SECONDS));
+
+
+        Duration between = Duration.between(ldt, nextLdt);
+
+        //  Period doesn't work with LocalDateTime
+        Period period = Period.between(ldt.toLocalDate(), nextLdt.toLocalDate());
     }
 }
