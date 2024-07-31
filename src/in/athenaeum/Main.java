@@ -3,26 +3,17 @@ package in.athenaeum;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
-        LocalDateTime ldt = LocalDateTime.of(2022, Month.JANUARY, 1, 9, 30, 0);
+        ZonedDateTime today = ZonedDateTime.now();
+        ZonedDateTime newYearInIndia = ZonedDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0, 0), ZoneId.of("Asia/Kolkata"));
 
-        //  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/format/DateTimeFormatter.html
-        LocalDateTime parsedLdt = LocalDateTime.parse("15-08-2024 08:30:00 am", DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
+        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
 
-        //  outputs am/pm; no uppercase. please check:
-        //  https://stackoverflow.com/a/13581910
-        //  https://stackoverflow.com/a/13581677
-        String s = ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a"));
-
-        LocalDateTime nextLdt = ldt.plus(Duration.of(8737699, ChronoUnit.SECONDS));
-
-
-        Duration between = Duration.between(ldt, nextLdt);
-
-        //  Period doesn't work with LocalDateTime
-        Period period = Period.between(ldt.toLocalDate(), nextLdt.toLocalDate());
+        //  Zone conversion
+        ZonedDateTime zdtInPdt = newYearInIndia.withZoneSameInstant(ZoneId.of("America/Los_Angeles"));
     }
 }
