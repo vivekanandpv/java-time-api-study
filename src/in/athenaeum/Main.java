@@ -22,6 +22,6 @@ public class Main {
         Period twoMonthsAnd5Days = Period.ofMonths(2).plusDays(5);
 
         //  LocalDate plus (minus) can also work with Period (as TemporalAmount)
-        newYear.plus(twoMonthsAnd5Days);
+        LocalDate plus = newYear.plus(twoMonthsAnd5Days);
     }
 }
